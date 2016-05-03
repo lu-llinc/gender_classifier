@@ -1,0 +1,148 @@
+.main_content {
+    padding-bottom:16px;
+    width:500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.float_left {
+  float: left;
+}
+.clear_float {
+  clear: both;
+
+}
+
+input, button {
+    width: 93%;
+}
+.width-33 {
+    width: 28%;
+}
+.width-25 {
+    width: 20%;
+}
+.prediction_content button {
+    height: 70px;
+}
+.font-12-px {
+    font-size:12px;
+}
+
+.prediction_content {
+    border: solid;
+    border-width: 1px;
+    padding: 20px;
+}
+.female {
+    color: #9040b6;
+}
+.male {
+    color: #47c0be;
+}
+.no-padding {
+    padding: 0;
+}
+.center-text {
+    text-align: center;
+}
+
+
+/**				loader
+----------------------------------------------------------**/
+.loader { background-color: #CCC }
+    .loader:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 100px;
+        width: 100px;
+        margin: 0px auto;
+        margin-top: -50px;
+        margin-left: -50px;
+        border: 10px solid rgba(128,128,128,.15);
+        border-top-color: rgba(128,128,128,.8);
+        border-radius: 100%;
+        -webkit-animation: rotation 1s infinite linear;
+        -moz-animation: rotation 1s infinite linear;
+        animation: rotation 1s infinite linear;
+    }
+
+
+#loadingOverlay {
+    position: fixed;
+    background: #f9f9f9;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    display: none;
+}
+
+    #loadingOverlay:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 100px;
+        width: 100px;
+        margin: 0px auto;
+        margin-top: -50px;
+        margin-left: -50px;
+        border: 10px solid rgba(128,128,128,.15);
+        border-top-color: rgba(128,128,128,.8);
+        border-radius: 100%;
+        -webkit-animation: rotation 1s infinite linear;
+        -moz-animation: rotation 1s infinite linear;
+        animation: rotation 1s infinite linear;
+    }
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-moz-keyframes rotation {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+
+    to {
+        -moz-transform: rotate(359deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+/*progress*/
+.progress {
+    width: 300px;
+    float: right;
+    display: none;
+}
+
+#leaderboard {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+}
+
+#leaderboard a {
+    padding: 0;
+}

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="main_content">
+        <h1>Gender prediction</h1>
+
+        <p>Determine anyone's gender automatically by filling in a Twitter username, first name or an image url.</p>
+        <div>
+            <input autocapitalize="off" autocomplete="off" autocorrect="off" id="js-term"
+                   placeholder="@Twitter username, name or an image url" spellcheck="false" required>
+            <br />
+            <button id="js-classify" name="classify" type="submit" class="ui-button">Determine Gender!</button>
+            <br />
+        </div>
+
+        <div id="js-prediction-content" class="prediction_content" style="display:none;">
+            <p class="no-padding">Gender prediction for the <span id="js-type"></span> <span id="js-provided-term"></span> is:</p>
+            <h2 class="center-text"><span id="js-prediction"></span></h2>
+
+            <h3>Is this correct?</h3>
+            <button class="js-correction" data-value="correct">Yes! Great!</button>
+            <h3>No, it should be: </h3>
+            <button class="js-correction js-correction-option float_left js-male" data-value="male">Male</button>
+            <button class="js-correction js-correction-option float_left js-female" data-value="female">Female</button>
+            <button class="js-correction js-correction-option float_left font-12-px" data-value="organisation_company">Organisation
+                Company</button>
+            <button class="js-correction js-correction-option float_left" data-value="other">Other</button>
+
+            <button class="js-correction float_left js-unknown float_left" data-value="unknown">Unknown</button>
+            <div class="clear_float"></div>
+        </div>
+
+        <p>This demo has been created as part of the UN Global Pulse project on gender classification of social media
+            accounts together with Leiden University's Centre for Innovation. The code behind this demo is used to
+            classify the gender of more than 50 million Twitter users. The results of this project can be viewed on
+            <a href="http://post2015.unglobalpulse.net/gender" target="_blank">http://post2015.unglobalpulse.net/gender</a>.
+            For further information or access to the code, please visit our Github repository:
+            <a href="https://github.com/LU-C4i/gender_classifier" target="_blank">https://github.com/LU-C4i/gender_classifier</a>.</p>
+
+        <h3>Made possible by:</h3>
+        <p>
+            <a href="http://centre4innovation.org/" target="_blank">Centre for Innovation</a>
+            <br />
+            <a href="http://www.unglobalpulse.org/" target="_blank">UN Global Pulse</a>
+            <br />
+            <a href="https://www.universiteitleiden.nl/" target="_blank">Leiden University</a>
+            <br />
+            <a href="http://www.qualogy.com/" target="_blank">Qualogy</a>
+            <br />
+            <a href="https://www.risa-it.nl/" target="_blank">Risa-IT</a>
+            <br />
+            <a href="http://lcds.science.leidenuniv.nl/" target="_blank">LCDS</a>
+        </p>
+    </div>
+{% endblock %}
+
+{% block javascript_bottom %}
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        var current;
+        $('#js-classify').click(function(event){
+            event.preventDefault();
+            classify();
+        });
+
+        $('#js-term').keyup(function(e){
+            if(e.keyCode == 13)
+            {
+                classify();
+            }
+        });
+
+        var classify = function() {
+            var term = $('#js-term').val().trim();
+            if (term == "") return;
+
+            Proxy.classify(term, classify_callback, callback_error);
+            $('.js-correction').show();
+            $('#js-prediction-content').addClass('loader').slideDown();
+        };
+
+        var callback_error = function() {
+            $('#js-prediction-content').slideUp().removeClass('loader');
+            $.notify('An error occurred, sorry :(');
+        };
+
+        var classify_callback = function(data) {
+            current = data;
+            $('#js-type').text(get_text_type(data.type));
+
+            if(data.type == 'url') {
+                $('#js-provided-term').html('<a href="'+data.term+'" target="_blank" class="no-padding">(link)</a>');
+            } else {
+                $('#js-provided-term').text(data.term);
+            }
+
+            if(data.prediction == 'male' || data.prediction.toLowerCase() == 'female') {
+                $('.js-correction-option ').removeClass('width-25').addClass('width-33');
+            } else {
+                $('.js-correction-option ').removeClass('width-33').addClass('width-25');
+            }
+            $('.js-'+data.prediction.toLowerCase()).hide();
+            $('#js-prediction').removeClass('unknown').removeClass('male').removeClass('female')
+                    .addClass(data.prediction.toLowerCase()).text(data.prediction.capitalize());
+
+            $('#js-prediction-content').removeClass('loader');
+        };
+
+        var get_text_type = function(type) {
+            switch (type) {
+                case "first_name":
+                    return "name";
+                case "url":
+                    return "url";
+                case "twitter_username":
+                    return "Twitter user";
+            }
+        };
+
+        $('.js-correction').click(function() {
+            var feedback = $(this).data('value');
+            var id = current.id;
+            Proxy.correction(id, feedback, correction_callback, callback_error);
+            $('#js-prediction-content').addClass('loader');
+        });
+
+        var correction_callback = function(data){
+            $.notify(data.message, 'success');
+            $('#js-prediction-content').slideUp().removeClass('loader');
+        };
+    });
+</script>
+{% endblock javascript_bottom %}
+
+

@@ -1,0 +1,66 @@
+{% set version = '0.2' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if title is defined %}
+        <title> {{ title }} - Gender Classification</title>
+    {% else %}
+        <title>Gender Classification</title>
+    {% endif %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css?v={{version}}">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.css?v={{version}}">
+    <link rel="stylesheet" type="text/css" href="/static/css/default.css?v={{version}}">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/utils.js?v={{version}}"></script>
+    <script src="/static/js/main.js?v={{version}}"></script>
+    <script type="text/javascript">
+
+        //set notify defaults
+        //for more see: http://notifyjs.com/
+        $.notify.defaults({
+            elementPosition: 'top center',
+            globalPosition: 'top center',
+            position: 'top center',
+            className: "warn",
+            showDuration: 600,
+            clickToHide: true,
+        });
+
+        var show_message = function(message) {
+           $.notify(message, "warn");
+        }
+    </script>
+
+
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    {% block meta %}
+    {% endblock meta %}
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+
+
+    {% block javascript_bottom %}
+    {% endblock javascript_bottom %}
+
+    {% if message is defined %}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                console.log( "ready!" );
+                var message = '{{message}}'
+                if (message != '') {
+                    $.notify(message, "warn");
+                }
+            });
+        </script>
+    {% endif %}
+</body>
+</html>
