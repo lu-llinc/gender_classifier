@@ -8,9 +8,9 @@ gender classification of social media accounts together with Leiden
 University's Centre for Innovation. The code behind this demo is used 
 to classify the gender of more than 50 million Twitter users. 
 The results of this project can be viewed on 
-http://post2015.unglobalpulse.net/gender.
+http://post2015.unglobalpulse.net.
 
-Within this github there is a gender classifier which is in the folder 
+Within this GitHub repository there is a gender classifier which is in the folder 
 `gender_classifier` and a demo page which is in the folder `demo_page`. 
 See the subfolders for more information. A live version of the demo 
 page can be found over here http://gender.peaceinformaticslab.org. 
@@ -25,10 +25,12 @@ The core team behind this project includes:
 
 - Leiden University’s Centre for Innovation
 - UN Global Pulse
+- Data2X
 
 As part of this project, valuable contributions have been made by:
 
 - Leiden Centre of Data Science (Leiden University)
+- UN Volunteers
 - Qualogy
 - Risa-IT
 - Maral Dadvar 
