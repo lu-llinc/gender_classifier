@@ -10,13 +10,19 @@ to classify the gender of more than 50 million Twitter users.
 The results of this project can be viewed on 
 http://post2015.unglobalpulse.net.
 
-Within this github there is a gender classifier which is in the folder 
-`gender_classifier` and a demo page which is in the folder `demo_page`. 
-See the subfolders for more information. A live version of the demo 
+A live version of the demo 
 page can be found over here http://gender.peaceinformaticslab.org. 
 
 This code makes use of the GenderComputer of University Eindhoven, see 
 their Github repository: https://github.com/tue-mdse/genderComputer .
+
+
+# Installation
+
+Within this github there is a gender classifier which is in the folder 
+`gender_classifier` and a demo page which is in the folder `demo_page`. 
+See the subfolders for more information and instruction on how to install
+the code.
 
 # How it works
 

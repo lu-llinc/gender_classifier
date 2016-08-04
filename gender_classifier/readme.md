@@ -140,4 +140,5 @@ Example output is a dict as can be seen in the code below.
 3. Modify `"/genderComputer/nameLists/script_map.csv"` file by adding a map of script/country for new dataset.
 4. If you are adding a name database for a new country, please make sure:
     1. the country name/abbreviation exists in `"/genderComputer/nameLists/acountryAbb.csv"`
+
 		
